@@ -1,4 +1,6 @@
 ---
+sudo: required
+dist: trusty
 language: python
 python: "2.7"
 
@@ -11,6 +13,9 @@ env:
   - ODOO_VERSION=9.0 ANSIBLE_VERSION="1.9,<2"
 
 before_install:
+  - sudo apt-get install lxc
+  - sudo lxc-create -n trusty -t download -- -d ubuntu -r trusty -a amd64
+  - sudo lxc-start -n trusty -d
   - sudo apt-get update -qq
   - sudo apt-get install -qq python-apt
 
